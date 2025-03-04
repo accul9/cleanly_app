@@ -31,7 +31,7 @@ class Task(models.Model):
     title = models.CharField(verbose_name="タイトル", max_length=20)
     memo = models.TextField(verbose_name="メモ", null=True, blank=True)
     is_completed = models.BooleanField(verbose_name="完了", default=False)
-    due_Date = models.DateField(verbose_name="期限", null=True, blank=True)
+    due_date = models.DateField(verbose_name="期限", null=True, blank=True)
     frequency = models.CharField(
         verbose_name="頻度", max_length=1, choices=FREQUENCY_CHOICES, default="D"
     )
