@@ -9,3 +9,13 @@ services:
       - 8000:8000
     volumes:
       - ./backend_project/backend:/backend
+  frontend:
+    build:
+      context: ./frontend_project
+      dockerfile: Dockerfile
+    container_name: "cleanly_frontend"
+    tty: true
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend_project/frontend:/usr/src/app

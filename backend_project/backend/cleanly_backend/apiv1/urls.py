@@ -11,5 +11,5 @@ router.register(r"tasks", TaskViewSet, basename="task")  # ルータにviewset�
 # ルータで作成したURLをincludeで追加
 app_name = "tasks"
 urlpatterns = [
-    path("tasks/", include(router.urls)),
+    path("", include(router.urls)),
 ]
