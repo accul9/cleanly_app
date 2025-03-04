@@ -1,0 +1,11 @@
+services:
+  backend:
+    build:
+      context: ./backend_project
+      dockerfile: Dockerfile
+    container_name: "cleanly_backend"
+    tty: true
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend_project/backend:/backend
