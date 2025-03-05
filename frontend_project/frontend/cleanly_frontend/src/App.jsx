@@ -66,9 +66,7 @@ function App() {
   return (
     <div className="App">
       <h1>Task List</h1>
-      //エラーの場合
       {error && <p style={{ color: "red" }}>{error}</p>}
-      //タスクがある場合
       {tasks.length > 0 ? (
         <ul>
           {tasks.map((task) => (
