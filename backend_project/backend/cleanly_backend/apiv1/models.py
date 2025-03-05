@@ -64,10 +64,11 @@ class Task(models.Model):
         # メモの有無によって表示を変える
         memo_display = f" | メモ: {self.memo}" if self.memo else ""
 
-        # Handle cases where due_date is None (fallback to "未設定")
+        # due_dateが入力されない場合は"未設定"を表示
         due_date_display = (
             self.due_date.strftime("%Y-%m-%d") if self.due_date else "未設定"
         )
+        # 繰り返しのデフォルト値を"なし"に設定
         repeat_display = dict(self.REPEAT_OPTIONS).get(self.repeat, "なし")
         return f"{self.title} - 期限: {due_date_display} | 頻度: {frequency_display}| 繰り返し: {repeat_display}{memo_display}"
 
