@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models.models import Task
+from ..models.models import Task
 from ..serializers import TaskSerializer
 from rest_framework.permissions import IsAuthenticated
 

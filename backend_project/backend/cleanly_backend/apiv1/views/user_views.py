@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from .models.models import CustomUser
+from ..models.t_user import CustomUser
 from ..serializers import UserSerializer
 
 # ユーザー登録用のViewSet

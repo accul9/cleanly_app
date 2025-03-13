@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .views.models.models import Task
+from .models.models import Task
+from .models.t_user import CustomUser
+
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -20,3 +22,14 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def get_frequency_label(self, obj):
         return obj.get_frequency_display()
+
+# ログイン用のシリアライザ
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+   
+# ユーザー登録用のシリアライザ
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ["id", "username", "email"]
