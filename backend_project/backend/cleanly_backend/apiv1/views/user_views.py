@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models.models import CustomUser
-from ..serializers import UserSerializer
+from ..models.t_user import CustomUser
+from ..serializers.user_serializers import UserSerializer
 
 # ユーザー登録用のViewSet
 class UserViewSet(viewsets.ModelViewSet):
