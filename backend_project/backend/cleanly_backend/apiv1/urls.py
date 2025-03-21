@@ -1,8 +1,6 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from .views.views import TaskViewSet
-from .views.user_views import UserViewSet
-from .views.auth_views import LoginAPIView, LogoutAPIView
+from .views import TaskViewSet, UserViewSet, LoginAPIView, LogoutAPIView
 
 router = DefaultRouter()  # ルータを作成
 router.register(r"tasks", TaskViewSet, basename="task")  # ルータにviewsetを登録

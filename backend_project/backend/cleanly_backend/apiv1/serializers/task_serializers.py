@@ -1,6 +1,5 @@
 from rest_framework import serializers
-# from .views.models.models import Task
-from ..models.models import Task 
+from ..models import Task 
 
 class TaskSerializer(serializers.ModelSerializer):
     is_completed_label = serializers.SerializerMethodField()

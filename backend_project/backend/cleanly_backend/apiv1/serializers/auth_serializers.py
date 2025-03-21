@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from django.core.validators import RegexValidator
-
-from ..models.t_user import CustomUser
+from ..models import CustomUser
 
 # login
 class LoginSerializer(serializers.ModelSerializer):

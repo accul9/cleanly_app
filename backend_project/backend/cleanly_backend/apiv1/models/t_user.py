@@ -1,7 +1,6 @@
 import uuid
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 # DB操作を提供するインターフェース
 class CustomUserManager(BaseUserManager):
@@ -9,6 +8,8 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError("メールアドレスは必須です")
         email = self.normalize_email(email)
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
         user = self.model(email=email, **extra_fields)
         if not password:
             raise ValueError("パスワードは必須です")
@@ -18,13 +19,13 @@ class CustomUserManager(BaseUserManager):
 
     # スーパーユーザー用作成
     def create_superuser(self, email, password, **extra_fields):
-        # extra_fields.setdefault("is_staff", True)
-        # extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
         return self.create_user(email, password, **extra_fields)
 
 
 # カスタムユーザー
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     class Meta:
         db_table = 'user'
         verbose_name = verbose_name_plural = 'ユーザー'

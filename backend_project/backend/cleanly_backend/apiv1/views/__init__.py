@@ -1,5 +1,5 @@
 # views/__init__.py
 
-from .auth_views import LoginAPIView, LogoutAPIView
+from .task_views import TaskViewSet
 from .user_views import UserViewSet
-from .views import TaskViewSet
+from .auth_views import LoginAPIView, LogoutAPIView
