@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apiv1",
     "rest_framework",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,5 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
+
+AUTH_USER_MODEL = "apiv1.CustomUser"
