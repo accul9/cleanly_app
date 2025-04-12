@@ -3,7 +3,7 @@ services:
     build:
       context: ./backend_project
       dockerfile: Dockerfile
-    container_name: "cleanly_backend_default"
+    container_name: "cleanly_backend"
     tty: true
     ports:
       - 8000:8000
@@ -13,11 +13,9 @@ services:
     build:
       context: ./frontend_project
       dockerfile: Dockerfile
-    container_name: "cleanly_frontend_default"
+    container_name: "cleanly_frontend"
     tty: true
     ports:
       - 3000:3000
     volumes:
       - ./frontend_project/frontend:/usr/src/app
-    environment:
-      - NODE_ENV=development
