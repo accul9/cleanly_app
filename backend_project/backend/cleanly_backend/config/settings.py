@@ -136,5 +136,12 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
+CORS_ALLOW_CREDENTIALS = True
 
 AUTH_USER_MODEL = "apiv1.CustomUser"
+
+# CSRFの設定(実験中)
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000"
+]
+CSRF_COOKIE_SECURE = False
