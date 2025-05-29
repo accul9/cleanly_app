@@ -5,9 +5,11 @@ import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import App from "./App.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
+import { CookiesProvider } from "react-cookie";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <CookiesProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -22,5 +24,6 @@ createRoot(document.getElementById("root")).render(
         />
       </Routes>
     </BrowserRouter>
+    </CookiesProvider>
   </StrictMode>
 );

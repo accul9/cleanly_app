@@ -36,17 +36,23 @@ export default App */
 
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import { useCookies } from "react-cookie";
 
 function App() {
   const [tasks, setTasks] = useState([]); //タスクの一覧を保持するstateのreact hook
   const [error, setError] = useState(null); //エラーメッセージを保持するstateのreact hook
-
+  const [cookies, _] = useCookies();
+  
   //データ取得など、UI以外の副作用を処理するeact hook
   useEffect(() => {
+    const csrftoken = cookies.csrftoken || '';
+    
     fetch("http://localhost:8000/api/v1/tasks/", {
+      credentials: 'include',
       headers: {
         // Authorization: "権限管理用のTokenがあればこちらに記載",
         "Content-Type": "application/json",
+        'X-CSRFToken': csrftoken,
       },
     })
       .then((response) => response.json())

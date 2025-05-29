@@ -1,23 +1,35 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useCookies } from 'react-cookie';
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [cookies, _] = useCookies();
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
+      const csrftoken = cookies.csrftoken || '';
       // ユーザー作成のAPI呼び出し
-      const response = await axios.post("http://localhost:8000/api/v1/users/", {
-        name,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/users/", 
+        {
+          name: name,
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            'X-CSRFToken': csrftoken,
+          },
+          withCredentials: true,
+        }
+      );
 
       console.log("ユーザー作成成功:", response.data);
 
@@ -25,14 +37,14 @@ function Signup() {
       await axios.post(
         "http://localhost:8000/api/v1/login/",
         {
-          username: email, // メールアドレスを認証用に送信
-          password,
+          email: email,
+          password: password,
         },
         {
-          withCredentials: true,
           headers: {
-            "X-CSRFToken": getCsrfToken(),
+            'X-CSRFToken': csrftoken,
           },
+          withCredentials: true,
         }
       );
 

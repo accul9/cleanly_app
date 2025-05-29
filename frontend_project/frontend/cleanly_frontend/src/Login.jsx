@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function Login() {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [cookies, setCookie] = useCookies();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const getToken = async () => {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/token/",
+        {
+          withCredentials: true,
+        }
+      );
+      setCookie("csrftoken", response.data.csrftoken)
+    };
+    getToken();
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      const csrftoken = cookies.csrftoken || '';
       const response = await axios.post(
         "http://localhost:8000/api/v1/login/",
         {
@@ -17,11 +35,17 @@ function Login() {
           password: password,
         },
         {
+          headers: {
+            'X-CSRFToken': csrftoken,
+          },
           withCredentials: true, // セッションCookieを利用
         }
       );
       console.log("ログイン成功:", response.data);
       setErrorMessage("");
+
+      // タスク画面に遷移
+      navigate("/task");
       // 必要に応じてリダイレクト処理や状態管理を追加
     } catch (error) {
       console.error("ログイン失敗:", error.response?.data || error.message);

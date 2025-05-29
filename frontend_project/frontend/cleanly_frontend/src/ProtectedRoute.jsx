@@ -8,7 +8,7 @@ export default function ProtectedRoute({ children }) {
   React.useEffect(() => {
     const checkAuth = async () => {
       try {
-        await axios.get("http://localhost:8000/api/v1/login/", {
+        const response = await axios.get("http://localhost:8000/api/v1/check_auth/", {
           withCredentials: true, // セッションCookieを利用
         });
         setIsAuthenticated(true);
