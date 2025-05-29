@@ -7,6 +7,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.middleware.csrf import get_token
+from rest_framework.permissions import IsAuthenticated
+# import logging
 
 # ログインAPI
 class LoginAPIView(APIView):
@@ -55,10 +57,23 @@ class LogoutAPIView(APIView):
             },
             status=status.HTTP_200_OK,
         )
-    
+
+# Csrf トークン発行
 class CsrfTokenAPIView(APIView):
     def get(self, request):
         token = get_token(request)
-        response = Response({},status=status.HTTP_200_OK,)
-        response.set_cookie('csrftoken', token)
-        return response
+        # logger = logging.getLogger(__name__)
+        # logger.debug(f"token: {token}")
+        return Response(
+            {
+                "csrftoken": token
+            }, 
+            status=status.HTTP_200_OK,
+        )
+    
+# 認証確認
+class AuthCheckAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response(None, status=status.HTTP_200_OK)

@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from .views import TaskViewSet, UserViewSet, LoginAPIView, LogoutAPIView, CsrfTokenAPIView
+from .views import TaskViewSet, UserViewSet, LoginAPIView, LogoutAPIView, CsrfTokenAPIView, AuthCheckAPIView
 
 router = DefaultRouter()  # ルータを作成
 router.register(r"tasks", TaskViewSet, basename="task")  # ルータにviewsetを登録
@@ -16,4 +16,5 @@ urlpatterns = [
     path('login/', LoginAPIView.as_view(), name='login'),
     path('logout/', LogoutAPIView.as_view(), name='logout'),
     path('token/', CsrfTokenAPIView.as_view(), name='token'),
+    path('check_auth/', AuthCheckAPIView.as_view(), name='check_auth')
 ]
