@@ -144,4 +144,26 @@ AUTH_USER_MODEL = "apiv1.CustomUser"
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000"
 ]
-CSRF_COOKIE_SECURE = False
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'development': {
+            'format': '%(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'development',
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        },
+    }
+}
