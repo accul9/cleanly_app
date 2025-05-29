@@ -33,6 +33,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(verbose_name='氏名', max_length=20)
     email = models.EmailField(verbose_name='メールアドレス', max_length=60, unique=True)
     password = models.CharField(verbose_name='パスワード', max_length=128)
+    is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(verbose_name='登録日時', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
 
