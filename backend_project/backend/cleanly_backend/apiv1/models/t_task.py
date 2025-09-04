@@ -1,8 +1,7 @@
 from django.db import models
 import uuid
-from django.contrib.auth.models import User
 import datetime
-
+from . import CustomUser
 
 # Create your models here.
 class Task(models.Model):
@@ -27,7 +26,7 @@ class Task(models.Model):
 
     # verbose_nameを使ってフィールドのラベルを日本語で指定
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="ユーザー")
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="ユーザー")
     title = models.CharField(verbose_name="タイトル", max_length=20)
     memo = models.TextField(verbose_name="メモ", null=True, blank=True)
     is_completed = models.BooleanField(verbose_name="完了", default=False)
